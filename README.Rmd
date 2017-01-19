@@ -4,7 +4,7 @@ Course seems very **interesting**. The 8am starting time is *torture*.
 
 The DataCamp integration is very good thing.
 
-Check out my [project](https://github.com/jokiilk/IODS-project/)
+Check out my [project diary](https://jokiilk.github.io/IODS-project/)
 
 
 ```
