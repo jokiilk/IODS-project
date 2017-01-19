@@ -1,0 +1,13 @@
+# This is a Readme file for Ilkka Jokipiis R-project in Github
+
+Course seems very **interesting**. The 8am starting time is *torture*.
+
+The DataCamp integration is very good thing.
+
+Check out my [project](https://github.com/jokiilk/IODS-project/)
+
+
+```
+Trying out different markdown options
+```
+
