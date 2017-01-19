@@ -1,5 +1,6 @@
 ---
 title: "IODS course project"
+author: "Ilkka Jokipii"
 output:
   html_document:
     theme: cosmo
