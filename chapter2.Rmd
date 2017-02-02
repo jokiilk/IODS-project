@@ -18,9 +18,12 @@ learning2014 <- read.table("data/learning.csv", sep = ",", header = TRUE)
 
 ```{r}
 str(learning2014)
+summary(learning2014)
+kuva <- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
+kuva
 ```
 ```{r}
-summary(learning2014)
+
 ```
 And the graphical overview for the data looks like this:
 ```{r}
