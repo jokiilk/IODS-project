@@ -40,7 +40,7 @@ str(learning)
 summary(learning)
 
 kuvaaja <- ggpairs(learning, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
-kuvaaja
+
 #saving data set
 write.csv(learning, file= "learning.csv")
 

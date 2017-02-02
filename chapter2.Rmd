@@ -10,9 +10,20 @@ For this exercise I will be using dataset on Student's learning data collected b
 
 The data set looks like this:
 ```{r}
-learning <- read.csv("data/learning.csv")
-str(learning)
+library(GGally)
+library(ggplot2)
+
+learning2014 <- read.table("data/learning.csv", sep = ",", header = TRUE)
+```
+
+```{r}
+str(learning2014)
 ```
 ```{r}
-summary(learning)
+summary(learning2014)
+```
+And the graphical overview for the data looks like this:
+```{r}
+kuvaaja <- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
+kuvaaja
 ```
