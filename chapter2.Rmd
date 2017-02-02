@@ -50,4 +50,33 @@ And the graphical overview for the data looks like this:
 kuvaaja <- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
 kuvaaja
 ```
-There are some differences between male and female participants. Their age is
+There are some differences between male and female participants. Male participants are slightly older and their attitude is little bit better.
+
+#Regression model
+
+Below is a linear model of points with stra and deep as explanatory variables.
+
+```{r}
+model <- lm(Points ~ Attitude + stra + deep, data = learning2014)
+summary(model)
+```
+Model shows that only attitude is good variable for explaining points. Stra is also quite good but the p-value is not small enough.
+
+New regression model with attitude as the only explanatory variable:
+```{r}
+model2 <- lm(Points ~ Attitude, data = learning2014)
+summary(model2)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
