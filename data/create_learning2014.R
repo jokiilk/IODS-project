@@ -7,6 +7,8 @@ str(learn)
 #Learning data has 183 observations and 60 variables. Table has 183 rows and 60 columns. Gender is the only variable that is not in integer format
 
 library("dplyr")
+library(ggplot2)
+library(GGally)
 
 #deep <- select(learn, starts_with("D")) Tulikin liikaa dataa mukaan tällä komennolla
 
@@ -35,7 +37,10 @@ learnComb$stra <- straKA
 
 learning <- filter(learnComb, Points != 0)
 str(learning)
+summary(learning)
 
+kuvaaja <- ggpairs(learning, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
+kuvaaja
 #saving data set
 write.csv(learning, file= "learning.csv")
 

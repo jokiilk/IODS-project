@@ -1,4 +1,4 @@
-# Studen datablablalsdlfnsd
+# Analyzing student data
 
 *Describe the work you have done this week and summarize your learning.*
 
@@ -12,4 +12,7 @@ The data set looks like this:
 ```{r}
 learning <- read.csv("data/learning.csv")
 str(learning)
+```
+```{r}
+summary(learning)
 ```
