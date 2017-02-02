@@ -1,4 +1,4 @@
-# Analyzing student data
+# Regression and model validation
 
 *Describe the work you have done this week and summarize your learning.*
 
@@ -8,7 +8,7 @@
 
 For this exercise I will be using dataset on Student's learning data collected by Kimmo Vehkalahti. I use smaller part of the data... 
 
-The data set looks like this:
+
 ```{r}
 library(GGally)
 library(ggplot2)
@@ -16,17 +16,36 @@ library(ggplot2)
 learning2014 <- read.table("data/learning.csv", sep = ",", header = TRUE)
 ```
 
+##Data overview
+
+In the first chunk I loaded the needed libraries and read csv data to a data frame. After that I used functions head(), str() and summary() to get a first look of the data.
+
+The data set looks like this:
+
+```{r}
+head(learning2014)
+```
+
 ```{r}
 str(learning2014)
-summary(learning2014)
-kuva <- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
-kuva
 ```
+
+```{r}
+summary(learning2014)
+```
+Data set has 166 observations and 8 variables. 4 variables are integers, 3 numericals and 1 variable is a factor with 2 levels.
+
+Data consists of partipants' background information, their answers and exam points. 
+
+Most of the participants were female. Their age was between 17 and 55 years, and the mean age of the participants was 25,51. 
+
+
+
 ```{r}
 
 ```
 And the graphical overview for the data looks like this:
 ```{r}
-kuvaaja <- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
+kuvaaja <- ggpairs(learning2014, lower = list(combo = wrap("facethist", bins = 20)))
 kuvaaja
 ```
