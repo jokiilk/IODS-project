@@ -14,6 +14,7 @@ library(GGally)
 library(ggplot2)
 
 learning2014 <- read.table("data/learning.csv", sep = ",", header = TRUE)
+learning2014$X <- NULL
 ```
 
 ##Data overview
@@ -33,7 +34,7 @@ str(learning2014)
 ```{r}
 summary(learning2014)
 ```
-Data set has 166 observations and 8 variables. 4 variables are integers, 3 numericals and 1 variable is a factor with 2 levels.
+Data set has 166 observations and 7 variables. 3 variables are integers, 3 numericals and 1 variable is a factor with 2 levels.
 
 Data consists of partipants' background information, their answers and exam points. 
 
@@ -46,6 +47,7 @@ Most of the participants were female. Their age was between 17 and 55 years, and
 ```
 And the graphical overview for the data looks like this:
 ```{r}
-kuvaaja <- ggpairs(learning2014, lower = list(combo = wrap("facethist", bins = 20)))
+kuvaaja <- ggpairs(learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
 kuvaaja
 ```
+There are some differences between male and female participants. Their age is
