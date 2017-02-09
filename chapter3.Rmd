@@ -7,6 +7,8 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
 ```
 
 # Logistic regression
@@ -17,16 +19,102 @@ In this chapter I will do logistic regression exercises. Exercises are done with
 
 First I combined two smaller data sets and removed duplicates from the combined data set. 
 
-After combining the data set I created new combined columns to the data set. I counted average alcohol use from answers on *weekly* and *daily* alcohol consumption (`alc_use`). From that I created a variable `high_use` which is `TRUE` if the average `alc_use` is greater than 2. Data wrangling process in this [file](https://github.com/jokiilk/IODS-project/blob/master/data/create_alc.R)
+After combining the data set I created new combined columns to the data set. I counted average alcohol use from answers on *weekend* and *daily* alcohol consumption (`alc_use`). From that I created a variable `high_use` which is `TRUE` if the average `alc_use` is greater than 2. Data wrangling process in this [file](https://github.com/jokiilk/IODS-project/blob/master/data/create_alc.R)
 
 The combined data set looks like this:
 
 ```{r}
 alc <- read.table("data/alc.csv", sep = ",", header = TRUE)
 alc$X <- NULL
+library(dplyr)
 ```
 ```{r}
 head(alc)
 str(alc)
 summary(alc)
 ```
+
+## Analyzing alcohol consumption
+
+<!-- The purpose of your analysis is to study the relationships between high/low alcohol consumption and some of the other variables in the data. To do this, choose 4 interesting variables in the data and for each of them, present your personal hypothesis about their relationships with alcohol consumption. (1 point) -->
+
+I will look into four variables of the data: `high_use`, `sex` `famrel` and `Pstatus`. 
+
+`alc_use` is average of two variables, weekend (`Walc`) and workday (`Dalc`) alcohol use. Both of the original variables are integers ranging from 1 to 5. 
+
+`sex` tells us students' sex. It is a factor variable with 2 levels F (female) and M (male)
+
+`famrel` tells us about quality of students' family relations. It is a integer variable and values are between 1 (very bad) and 5 (excellent)
+
+`Pstatus` parent's cohabitation status. Factor with 2 levels: T - living together or A - apart 
+
+
+My personal hypothesis are:
+
+* male students use more alcohol than female students
+* students with bad family relations use more alcohol than others
+* students whose parents are not living together use more alcohol than others
+
+
+
+<!-- Numerically and graphically explore the distributions of your chosen variables and their relationships with alcohol consumption (use for example cross-tabulations, bar plots and box plots). Comment on your findings and compare the results of your exploration to your previously stated hypotheses. (5 points) -->
+
+```{r}
+g1 <- ggplot(data=alc, mapping=aes(x=sex, y=alc_use))
+g2 <- g1 + geom_boxplot()
+g2
+
+
+```
+
+```{r}
+tab <- table(sex = alc$sex, high_use = alc$high_use)
+tab
+
+tab2 <- prop.table(tab, 1) %>% addmargins()
+tab2
+```
+Male students use more alcohol than female students. Approximately 40% of male students are high users of alcohol.
+
+
+```{r family relations and alcohol}
+family <- ggplot(data = alc, mapping = aes(x = high_use, y = famrel))
+graph <- family + geom_boxplot() + ggtitle("Family relations and high use of alcohol")
+graph
+```
+
+It seems that students who are high users of alcohol tend to have worse family relations than those who use less alcohol. 
+
+
+```{r}
+HomeVsUse <- table(Pstatus = alc$Pstatus, high_use = alc$high_use)
+HomeVsUse
+```
+
+```{r}
+prop.table(HomeVsUse, 1) %>% addmargins()
+
+```
+
+Parents' cohabitation status doesn't seem to cause high alcohol use among students.
+
+```{r}
+home <- ggplot(data=alc, mapping = aes(x=Pstatus, y=alc_use, col=sex))
+home2 <- home + geom_boxplot()
+home2
+```
+But if we look at the more precise alcohol use data, there may be some differences. It seems that male students whose parents are not living together tend to use more alcohol. On the other hand the female students with parents living together use more alcohol than female students whose parents are not living together.
+
+
+<!-- Use logistic regression to statistically explore the relationship between your chosen variables and the binary high/low alcohol consumption variable as the target variable. Present and interpret a summary of the fitted model. Present and interpret the coefficients of the model as odds ratios and provide confidence intervals for them. Interpret the results and compare them to your previously stated hypothesis. Hint: If your model includes factor variables see for example the first answer of this stackexchange thread on how R treats and how you should interpret these variables in the model output (or use some other resource to study this). (5 points) -->
+
+<!-- Using the variables which, according to your logistic regression model, had a statistical relationship with high/low alcohol consumption, explore the predictive power of you model. Provide a 2x2 cross tabulation of predictions versus the actual values and optionally display a graphic visualizing both the actual values and the predictions. Compute the total proportion of inaccurately classified individuals (= the training error) and comment on all the results. Compare the performance of the model with performance achieved by some simple guessing strategy. (3 points) -->
+
+
+
+
+
+
+
+
+
