@@ -1,0 +1,32 @@
+---
+title: "chapter3"
+author: "Ilkka Jokipii"
+date: "9 helmikuuta 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Logistic regression
+
+## Data descpription
+
+In this chapter I will do logistic regression exercises. Exercises are done with student alcohol consumption data set. 
+
+First I combined two smaller data sets and removed duplicates from the combined data set. 
+
+After combining the data set I created new combined columns to the data set. I counted average alcohol use from answers on *weekly* and *daily* alcohol consumption (`alc_use`). From that I created a variable `high_use` which is `TRUE` if the average `alc_use` is greater than 2. Data wrangling process in this [file](https://github.com/jokiilk/IODS-project/blob/master/data/create_alc.R)
+
+The combined data set looks like this:
+
+```{r}
+alc <- read.table("data/alc.csv", sep = ",", header = TRUE)
+alc$X <- NULL
+```
+```{r}
+head(alc)
+str(alc)
+summary(alc)
+```
