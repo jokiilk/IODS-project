@@ -16,6 +16,8 @@ library(MASS)
 data("Boston")
 ```
 
+## Overview of the data set
+
 The data set, which is about Boston housing prices, looks like this:
 
 ```{r}
@@ -25,3 +27,78 @@ summary(Boston)
 
 ```
 Data has 506 rows and 14 different variables. The variables are called crim, zn, indus, chas, nox, rm, age, dis, rad, tax, ptratio, black, lstat and medv. They cover different aspects of different regions, for example `crim` tells per capita crime rate and `ptratio` is about pupil-teacher ratio.
+
+## Graphical overview
+
+
+```{r}
+library(ggplot2)
+
+pairs(Boston)
+```
+
+
+
+```{r}
+library(corrplot)
+cor_matrix <- cor(Boston)
+corrplot(cor_matrix, method="circle", type = "upper", cl.pos = "b", tl.pos ="d", tl.cex = 0.6)
+
+```
+
+Strongest positive correlation is between variables `rad` (accessibility to higways) and `tax` (property taxes). Correlation is also strong between `crime` & `rad` and `nox` & `age` There are strong negative correlations between variables `age` & `dis`, `nox` & `age` and `lstat` & `medv`.
+
+## Standardizing the data set
+
+```{r}
+boston_scaled <- scale(Boston)
+summary(boston_scaled)
+```
+
+Next I will create a categorical variable from data set crime rate variable.
+
+```{r}
+boston_scaled <- as.data.frame(boston_scaled)
+
+scaled_crim <- boston_scaled$crim
+
+bins <- quantile(scaled_crim)
+
+crime <- cut(scaled_crim, breaks = bins, include.lowest = TRUE, labels = c("low", "med_low", "med_high", "high"))
+summary(crime)
+
+
+```
+
+The new `crime` variable is the crime rate divide into quantiles. This is enough for me so I will drop the original variable from the data set and add the new variable to the data.
+
+```{r}
+boston_scaled <- dplyr::select(boston_scaled, -crim)
+
+boston_scaled <- data.frame(boston_scaled, crime)
+
+```
+
+
+
+```{r}
+n <- nrow(boston_scaled)
+ind <- sample(n,  size = n * 0.8)
+train <- boston_scaled[ind,]
+test <- boston_scaled[-ind,]
+```
+Data set divided to *train* and *test* data sets which have 80% and 20% of the original data respectively
+
+```{r}
+str(train)
+str(test)
+```
+
+
+
+
+
+
+
+
+
