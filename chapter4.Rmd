@@ -1,0 +1,27 @@
+---
+title: "chapter4"
+author: "Ilkka Jokipii"
+date: "17 helmikuuta 2017"
+output: html_document
+---
+
+
+# Clustering and classification
+
+
+First I load the Boston data from the MASS package
+
+```{r}
+library(MASS)
+data("Boston")
+```
+
+The data set, which is about Boston housing prices, looks like this:
+
+```{r}
+head(Boston)
+str(Boston)
+summary(Boston)
+
+```
+Data has 506 rows and 14 different variables. The variables are called crim, zn, indus, chas, nox, rm, age, dis, rad, tax, ptratio, black, lstat and medv. They cover different aspects of different regions, for example `crim` tells per capita crime rate and `ptratio` is about pupil-teacher ratio.
