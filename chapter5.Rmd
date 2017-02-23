@@ -1,0 +1,54 @@
+---
+title: "Dimensionality and reduction techniques"
+author: "Ilkka Jokipii"
+date: "23 helmikuuta 2017"
+output: html_document
+---
+
+
+
+# Dimensionality reduction techniques
+
+In this chapter I will use some dimensionality reduction techniques and I will use human data set. The wrangling process of the data set can ben seen [here](https://github.com/jokiilk/IODS-project/blob/master/data/create_human.R)
+
+[Data set](https://github.com/jokiilk/IODS-project/blob/master/data/human.csv)
+
+## Data overview
+
+```{r}
+human <- read.table("data/human.csv", sep = ",", header = TRUE, row.names = 1)
+
+summary(human)
+head(human)
+str(human)
+
+```
+
+Data set is a small subset of United Nations' Human Development Index. The Data set I will use consists of 155 observations (countries) and 8 different variables. The variables are:
+
+`Edu2.FM` = Proportion of females with at least secondary education / Proportion of males with at least secondary education   
+`Labo.FM` = Proportion of females in the labour force / Proportion of males in the labour force   
+`Edu.Exp` = Expected years of schooling   
+`Life.Exp` = Life expectancy at birth   
+`GNI` = Gross National Income per capita   
+`Mat.Mor` = Maternal mortality ratio   
+`Ado.Birth` = Adolescent birth rate   
+`Parli.F` = Percetange of female representatives in parliament   
+
+## Graphical overview
+
+<!-- Show a graphical overview of the data and show summaries of the variables in the data. Describe and interpret the outputs, commenting on the distributions of the variables and the relationships between them. (0-2 points) -->
+
+<!-- Perform principal component analysis (PCA) on the not standardized human data. Show the variability captured by the principal components. Draw a biplot displaying the observations by the first two principal components (PC1 coordinate in x-axis, PC2 coordinate in y-axis), along with arrows representing the original variables. (0-2 points) -->
+
+<!-- Standardize the variables in the human data and repeat the above analysis. Interpret the results of both analysis (with and without standardizing). Are the results different? Why or why not? Include captions in you plots where you describe the results by using not just your variable names, but the actual phenomenons they relate to. (0-4 points) -->
+
+<!-- Give your personal interpretations of the first two principal component dimensions based on the biplot drawn after PCA on the standardized human data. (0-2 points) -->
+
+<!-- Load the tea dataset from the package Factominer. Explore the data briefly: look at the structure and the dimensions of the data and visualize it. Then do Multiple Correspondence Analysis on the tea data (or to a certain columns of the data, it's up to you). Interpret the results of the MCA and draw at least the variable biplot of the analysis. You can also explore other plotting options for MCA. Comment on the output of the plots. (0-4 points) -->
+
+
+
+
+
+
